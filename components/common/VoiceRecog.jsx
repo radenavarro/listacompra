@@ -3,6 +3,7 @@ import Voice from '@react-native-community/voice'
 import { voiceRecogStyles } from './VoiceRecog-styles'
 import { useEffect, useState } from 'react'
 import { useTheme } from '@react-navigation/native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const VoiceRecog = (props) => {
   const [result, setResult] = useState('')
@@ -18,7 +19,6 @@ const VoiceRecog = (props) => {
   }, [])
 
   const theme = useTheme()
-  console.log(theme)
   const styles = voiceRecogStyles(theme)
 
   const speechStartHandler = e => {
@@ -53,52 +53,53 @@ const VoiceRecog = (props) => {
     }
   }
 
-  const clear = () => {
-    setResult('')
-  }
+  // const clear = () => {
+  //   setResult('')
+  // }
 
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <Text style={styles.headingText}>Lista de la compra</Text>
-        <View style={styles.textInputStyle}>
-          <TextInput
-            value={result}
+        <View style={styles.voiceRecogContainer}>
+          <View style={styles.textInputStyle}>
+            <TextInput
+              value={result}
+              style={{ fontFamily: 'Quicksand-Regular', minWidth: 140 }}
             // multiline
-            placeholder='Prueba a decir algo'
-            style={{
-              flex: 1,
-              height: '100%'
-            }}
-            onChangeText={text => setResult(text)}
-          />
-        </View>
-        <View style={styles.btnContainer}>
-          {isLoading
-            ? (
-              <ActivityIndicator size='large' color={theme.colors?.text} />
-              )
-            : (
-              <TouchableOpacity
-                onPress={startRecording}
-                style={styles.speak}
-              >
-                <Text style={{ color: 'white', fontWeight: 'bold' }}>Hablar</Text>
-              </TouchableOpacity>
-              )}
+              placeholder='Prueba a decir algo'
+              onChangeText={text => setResult(text)}
+            />
+          </View>
+          <View style={styles.btnContainer}>
+            {isLoading
+              ? (
+                <ActivityIndicator size='large' color={theme.colors?.text} />
+                )
+              : (
+                <TouchableOpacity
+                  onPress={startRecording}
+                  style={styles.speak}
+                >
+                  {/* <Text style={{ color: 'white', fontWeight: 'bold' }}>Hablar</Text> */}
+                  <Icon style={styles.roundIcon} name='keyboard-voice' />
+                </TouchableOpacity>
+                )}
+            <TouchableOpacity
+              style={styles.stop}
+              onPress={stopRecording}
+            >
+              <Icon style={styles.roundIcon} name='stop' />
+            </TouchableOpacity>
+
+          </View>
           <TouchableOpacity
-            style={styles.stop}
-            onPress={stopRecording}
+            style={styles.add}
+            onPress={() => props.onAdd(result)}
           >
-            <Text style={{ color: 'white', fontWeight: 'bold' }}>Detener</Text>
+            <Icon style={styles.roundIcon} name='add' />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.clear}
-          onPress={clear}
-        >
-          <Text style={{ color: 'white', fontWeight: 'bold' }}>Reset</Text>
-        </TouchableOpacity>
       </SafeAreaView>
     </View>
   )

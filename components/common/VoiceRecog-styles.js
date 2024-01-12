@@ -2,15 +2,26 @@ import { StyleSheet } from 'react-native'
 
 export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    minHeight: 140,
+    marginVertical: 16,
     backgroundColor: colors.background,
-    padding: 24
+    padding: 16,
+    shadowColor: colors.shadowColor,
+    elevation: 4
   },
   headingText: {
     alignSelf: 'center',
-    marginVertical: 26,
-    fontWeight: 'bold',
-    fontSize: 26
+    fontSize: 16,
+    paddingBottom: 8,
+    fontFamily: 'Quicksand-Bold'
+  },
+  voiceRecogContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+    gap: 16
   },
   textInputStyle: {
     flexDirection: 'row',
@@ -27,7 +38,8 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     // shadowRadius: 2,
     // elevation: 2,
     // shadowOpacity: 0.4,
-    color: colors.text
+    color: colors.text,
+    fontFamily: 'Quicksand-Medium'
   },
   speak: {
     backgroundColor: colors.primary,
@@ -35,7 +47,9 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 8,
-    borderRadius: 8
+    width: 50,
+    height: 50,
+    borderRadius: 50
   },
   stop: {
     backgroundColor: colors.danger,
@@ -43,22 +57,28 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 8,
-    borderRadius: 8
+    width: 50,
+    height: 50,
+    borderRadius: 50
   },
-  clear: {
+  add: {
     backgroundColor: colors.default,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
-    borderRadius: 8,
-    marginTop: 15
+    padding: 8,
+    width: 50,
+    height: 50,
+    borderRadius: 50
   },
   btnContainer: {
     display: 'flex',
-    flexDirection: 'row',
-    with: '50%',
-    justifyContent: 'space-evenly',
-    marginTop: 24
+    flexDirection: 'column'
+    // justifyContent: 'flex-start',
+    // marginTop: 24
+  },
+  roundIcon: {
+    color: colors.buttonText,
+    fontSize: 24
   }
 })

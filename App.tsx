@@ -27,8 +27,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Home from './views/home/Home';
-import { DarkMode } from './components/common/themes/darkMode';
-import { LightMode } from './components/common/themes/lightMode';
+import { DarkMode } from './themes/darkMode';
+import { LightMode } from './themes/lightMode';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -64,6 +64,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === "dark";
+  console.log(useColorScheme())
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
