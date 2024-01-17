@@ -1,11 +1,9 @@
 import { StyleSheet } from 'react-native'
-import { useDimensions } from '../../hooks/useDimensions'
 
 export const homeStyles = ({ colors }) => StyleSheet.create({
   container: {
     width: '100%',
     minHeight: '100%',
-    // height: useDimensions()?.[1] ?? '100%',
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'nowrap',
@@ -42,6 +40,9 @@ export const homeStyles = ({ colors }) => StyleSheet.create({
   },
   listTextChecked: {
     color: colors.textChecked
+  },
+  listTextLineThrough: {
+    textDecorationLine: 'line-through'
   },
   listIconChecked: {
     color: colors.iconChecked,

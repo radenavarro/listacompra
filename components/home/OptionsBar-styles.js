@@ -8,7 +8,8 @@ export const optionsBarStyles = ({ colors }) => StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: 8,
-    width: '80%'
+    width: '80%',
+    marginTop: 16
   },
   item: {
     padding: 4,

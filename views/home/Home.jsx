@@ -27,18 +27,13 @@ const Home = (props) => {
   const swipeItemOut = useListStore((state) => state.removeFromList)
   const Item = ({ uuid, title, checked }) => (
     <Pressable
-      style={(() => {
-        if (checked) return [styles.listItem, styles.listItemChecked]
-        return [styles.listItem]
-      })()}
+      style={checked ? [styles.listItem, styles.listItemChecked] : [styles.listItem]}
       onPress={() => onItemCheck(uuid)}
     >
       <Text
-        style={(() => {
-          if (checked) return [styles.listText, styles.listTextChecked]
-          return [styles.listText]
-        })()}
-      >{title}
+        style={checked ? [styles.listText, styles.listTextChecked, styles.listTextLineThrough] : [styles.listText]}
+      >
+        {title}
       </Text>
       {checked && (
         <Icon name='done' style={styles.listIconChecked} />
@@ -63,7 +58,6 @@ const Home = (props) => {
               rightContent={<View />}
               onRightActionRelease={() => swipeItemOut(item.uuid)}
             >
-              {/* {console.log(item)} */}
               <Item title={item.nombre} uuid={item.uuid} checked={item.checked} />
             </Swipeable>
           )}
