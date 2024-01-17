@@ -4,6 +4,7 @@ import { voiceRecogStyles } from './VoiceRecog-styles'
 import { useEffect, useState } from 'react'
 import { useTheme } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { useListStore } from '../../hooks/zustand/storeHooks'
 
 const VoiceRecog = (props) => {
   const [result, setResult] = useState('')
@@ -33,6 +34,7 @@ const VoiceRecog = (props) => {
   const speechResultsHandler = e => {
     const text = e.value[0]
     setResult(text)
+    setStoredItem(text)
   }
 
   const startRecording = async () => {
@@ -57,6 +59,8 @@ const VoiceRecog = (props) => {
   //   setResult('')
   // }
 
+  const setStoredItem = useListStore((state) => state.setCurrentItem)
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -68,7 +72,10 @@ const VoiceRecog = (props) => {
               style={{ fontFamily: 'Quicksand-Regular', minWidth: 140 }}
             // multiline
               placeholder='Prueba a decir algo'
-              onChangeText={text => setResult(text)}
+              onChangeText={(text) => {
+                setResult(text)
+                setStoredItem(text)
+              }}
             />
           </View>
           <View style={styles.btnContainer}>

@@ -4,13 +4,13 @@ import VoiceRecog from '../../components/common/VoiceRecog'
 import OptionsBar from '../../components/home/OptionsBar'
 import { useState } from 'react'
 import { useTheme } from '@react-navigation/native'
-import uuid from 'react-native-uuid'
 import SwipeableFlatList from 'react-native-swipeable-list'
 import Swipeable from 'react-native-swipeable'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import BottomMenu from '../../components/common/BottomMenu'
+import { useListStore } from '../../hooks/zustand/storeHooks'
 
 const Home = (props) => {
-  const [listElements, setListElements] = useState([])
   const [swiping, setSwiping] = useState(false)
 
   const theme = useTheme()
@@ -22,30 +22,16 @@ const Home = (props) => {
     <TouchableHighlight key='1'><Text>Button 1</Text></TouchableHighlight>,
     <TouchableHighlight key='2'><Text>Button 2</Text></TouchableHighlight>
   ]
-
-  const onAdd = (element) => {
-    setListElements([
-      ...listElements,
-      {
-        uuid: uuid.v4(),
-        nombre: element
-      }
-    ])
-  }
+  const onAdd = useListStore((state) => state.addToList)
+  const onItemCheck = useListStore((state) => state.checkItem)
+  const swipeItemOut = useListStore((state) => state.removeFromList)
   const Item = ({ uuid, title, checked }) => (
     <Pressable
       style={(() => {
         if (checked) return [styles.listItem, styles.listItemChecked]
         return [styles.listItem]
       })()}
-      onPress={() => {
-        const updtItems = [...listElements]
-        const idx = updtItems.findIndex((it) => it.uuid === uuid)
-        if (idx !== -1) {
-          updtItems[idx].checked = !updtItems[idx].checked
-          setListElements(updtItems)
-        }
-      }}
+      onPress={() => onItemCheck(uuid)}
     >
       <Text
         style={(() => {
@@ -65,30 +51,8 @@ const Home = (props) => {
       <SafeAreaView style={styles.container}>
         <OptionsBar />
         <VoiceRecog onAdd={onAdd} />
-        {/* <ScrollView
-        style={styles.list}
-        scrollEnabled={!swiping}
-      >
-        {listElements.map((item, idx) => {
-          return (
-            <Swipeable
-              key={item.uuid}
-              onSwipeStart={() => { setSwiping(true) }}
-              onSwipeEnd={() => { setSwiping(false) }}
-              leftButtons={leftButtons}
-              rightContent={<View />}
-              onRightActionRelease={() => {
-                const updtItems = listElements.filter((listElement) => listElement.uuid !== item.uuid)
-                setListElements(updtItems)
-              }}
-            >
-              <Item title={item.nombre} uuid={item.uuid} checked={item.checked} />
-            </Swipeable>
-          )
-        })}
-      </ScrollView> */}
         <FlatList
-          data={listElements}
+          data={useListStore((state) => state.currentList)}
           style={styles.list}
           renderItem={({ item }) => (
             <Swipeable
@@ -97,10 +61,7 @@ const Home = (props) => {
               onSwipeEnd={() => { setSwiping(false) }}
               leftButtons={leftButtons}
               rightContent={<View />}
-              onRightActionRelease={() => {
-                const updtItems = listElements.filter((listElement) => listElement.uuid !== item.uuid)
-                setListElements(updtItems)
-              }}
+              onRightActionRelease={() => swipeItemOut(item.uuid)}
             >
               {/* {console.log(item)} */}
               <Item title={item.nombre} uuid={item.uuid} checked={item.checked} />

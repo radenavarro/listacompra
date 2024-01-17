@@ -26,15 +26,20 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
+
 import Home from './views/home/Home';
 import { DarkMode } from './themes/darkMode';
 import { LightMode } from './themes/lightMode';
+import Archivo from './views/archivo/Archivo';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
 const Stack = createNativeStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === "dark";
@@ -64,7 +69,7 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === "dark";
-  console.log(useColorScheme())
+  // console.log(useColorScheme())
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -103,11 +108,14 @@ function App(): React.JSX.Element {
   //   </SafeAreaView>
   // );
   return (
-    <NavigationContainer theme={isDarkMode ? DarkMode : LightMode}>
-      <Stack.Navigator>
-        <Stack.Screen name={'Home'} component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer theme={isDarkMode ? DarkMode : LightMode}>
+        <Tab.Navigator>
+          <Tab.Screen name={'Home'} component={Home} />
+          <Tab.Screen name={'Archivo'} component={Archivo} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
