@@ -16,6 +16,8 @@ export const DarkMode = {
     textChecked: 'rgb(182, 182, 182)',
     iconChecked: 'rgb(0, 255, 30)',
     backgroundChecked: 'rgba(255, 255, 255, 0.2)',
-    shadowColor: '#e1e1e1'
+    shadowColor: '#e1e1e1',
+    tagBorder: 'rgba(255, 255, 255, 0.2)',
+    tag: 'rgba(255, 255, 255, 0.05)'
   }
 }

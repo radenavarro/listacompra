@@ -22,6 +22,7 @@ const Home = (props) => {
     <TouchableHighlight key='1'><Text>Button 1</Text></TouchableHighlight>,
     <TouchableHighlight key='2'><Text>Button 2</Text></TouchableHighlight>
   ]
+  const { currentList } = useListStore()
   const onAdd = useListStore((state) => state.addToList)
   const onItemCheck = useListStore((state) => state.checkItem)
   const swipeItemOut = useListStore((state) => state.removeFromList)
@@ -47,16 +48,16 @@ const Home = (props) => {
         <OptionsBar />
         <VoiceRecog onAdd={onAdd} />
         <FlatList
-          data={useListStore((state) => state.currentList)}
+          data={currentList}
           style={styles.list}
           renderItem={({ item }) => (
             <Swipeable
               key={item.uuid}
               onSwipeStart={() => { setSwiping(true) }}
               onSwipeEnd={() => { setSwiping(false) }}
-              leftButtons={leftButtons}
-              rightContent={<View />}
-              onRightActionRelease={() => swipeItemOut(item.uuid)}
+              rightButtons={leftButtons}
+              leftContent={<View />}
+              onLeftActionRelease={() => swipeItemOut(item.uuid)}
             >
               <Item title={item.nombre} uuid={item.uuid} checked={item.checked} />
             </Swipeable>

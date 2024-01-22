@@ -16,6 +16,8 @@ export const LightMode = {
     textChecked: 'rgb(110, 110, 110)',
     iconChecked: 'rgb(164, 250, 174)',
     backgroundChecked: 'rgba(0, 0, 0, 0.2)',
-    shadowColor: '#171717'
+    shadowColor: '#171717',
+    tagBorder: 'rgba(0, 0, 0, 0.2)',
+    tag: 'rgba(0, 0, 0, 0.05)'
   }
 }
