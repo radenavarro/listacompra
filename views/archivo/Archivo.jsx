@@ -1,17 +1,49 @@
 import { useTheme } from '@react-navigation/native'
-import { Text, SafeAreaView, ImageBackground, FlatList, View, Pressable } from 'react-native'
+import { Text, SafeAreaView, ImageBackground, FlatList, View, Pressable, TouchableHighlight } from 'react-native'
 import Swipeable from 'react-native-swipeable'
 import { ArchivoStyles } from './Archivo-styles'
-import { useArchiveStore } from '../../hooks/zustand/storeHooks'
+import { useArchiveStore, useListStore } from '../../hooks/zustand/storeHooks'
 import { Icon } from 'react-native-paper'
 import Tag from '../../components/common/Tag'
 
 const Archivo = (props) => {
   const theme = useTheme()
   const styles = ArchivoStyles(theme)
+
+  const { currentList } = useListStore()
+  const setCurrentList = useListStore((state) => state.setCurrentList)
   const { archivedList } = useArchiveStore()
-  // const swipeItemOut = useArchiveStore((state) => state.removeFromArchive)
-  const swipeItemOut = (item) => console.log(item.fecha)
+  const swipeItemOut = useArchiveStore((state) => state.removeFromArchive)
+  const { activeUuidList } = useArchiveStore()
+  const setActiveUuidList = useArchiveStore((state) => state.setActiveUuidList)
+
+  const restaurarLista = () => {
+    const idx = archivedList.findIndex((line) => line.list_uuid === activeUuidList)
+    if (idx !== -1) {
+      const newList = {
+        ...archivedList[idx],
+        items: archivedList[idx].items.map((item) => {
+          item.checked = false
+          return item
+        })
+      }
+
+      if (currentList?.length === 0) {
+        setCurrentList(newList.items)
+      } else {
+        // TODO: hay items, preguntar si se quieren sobreescribir con la nueva lista
+      }
+    }
+    // TODO: no se encuentra la lista, hay algún error
+  }
+
+  const rightButtons = [
+    <View key='1' style={styles.crearDeNuevo}>
+      <TouchableHighlight style={styles.crearDeNuevoButton} onPress={restaurarLista}>
+        <Text style={styles.crearDeNuevoText}>Crear de nuevo</Text>
+      </TouchableHighlight>
+    </View>
+  ]
 
   const Item = ({ list_uuid, title }) => (
     <Pressable
@@ -28,19 +60,19 @@ const Archivo = (props) => {
 
   return (
     <ImageBackground source={require('../../img/image-3ucottvo.png')} resizeMode='repeat'>
-      <SafeAreaView style={styles.container}>{console.log(archivedList)}
-        <Text style={[styles.h4, styles.paddingTop8]}>Listas archivadas</Text>
+      <SafeAreaView style={styles.container}>
+        <Text style={[styles.h4, styles.paddingVertical8]}>Listas archivadas</Text>
         <FlatList
           data={archivedList}
           style={styles.list}
           renderItem={({ item }) => (
             <Swipeable
-              key={item.uuid}
-              onSwipeStart={() => {}}
-              onSwipeEnd={() => {}}
-              // leftButtons={leftButtons}
+              key={item.list_uuid}
+              onSwipeStart={() => { setActiveUuidList(item.list_uuid) }}
+              leftButtonWidth={56}
+              rightButtons={rightButtons}
               leftContent={<View />}
-              onLeftActionRelease={() => swipeItemOut(item)}
+              onLeftActionRelease={() => swipeItemOut(item.list_uuid)}
             >
               <Item
                 title={(

@@ -2,11 +2,13 @@ import { StyleSheet } from 'react-native'
 
 export const ArchivoStyles = ({ colors }) => StyleSheet.create({
   container: {
+    padding: 0,
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'nowrap',
     // justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
     height: '100%'
   },
   h4: {
@@ -15,6 +17,9 @@ export const ArchivoStyles = ({ colors }) => StyleSheet.create({
   },
   paddingTop8: {
     paddingTop: 8
+  },
+  paddingVertical8: {
+    paddingVertical: 8
   },
   list: {
     width: '100%',
@@ -46,7 +51,7 @@ export const ArchivoStyles = ({ colors }) => StyleSheet.create({
   },
   listTags: {
     padding: 0,
-    maxWidth: '50%',
+    width: '50%',
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'row',
@@ -54,7 +59,7 @@ export const ArchivoStyles = ({ colors }) => StyleSheet.create({
   },
   listTexts: {
     padding: 0,
-    maxWidth: '50%',
+    width: '50%',
     flexGrow: 1
     // display: 'flex',
     // flexDirection: 'row',
@@ -63,5 +68,34 @@ export const ArchivoStyles = ({ colors }) => StyleSheet.create({
   listText: {
     color: colors.text,
     fontFamily: 'Quicksand-Medium'
+  },
+  crearDeNuevo: {
+    width: 56,
+    height: '100%',
+    padding: 6,
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  crearDeNuevoButton: {
+    width: 56,
+    height: 56,
+    backgroundColor: 'rgba(126, 255, 94, 0.2)',
+    borderColor: colors.border,
+    borderWidth: 1,
+    borderRadius: 12,
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    justifyContent: 'center'
+  },
+  crearDeNuevoText: {
+    padding: 4,
+    color: colors.text,
+    fontFamily: 'Quicksand-Medium',
+    fontSize: 10,
+    textAlign: 'center'
   }
 })

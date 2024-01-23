@@ -23,6 +23,7 @@ export const useListStore = create(
       currentItem: {},
       setCurrentItem: (text) => set((state) => ({ currentItem: text })),
       currentList: [],
+      setCurrentList: (list) => set((state) => ({ currentList: list })),
       clearList: () => set({ currentList: [] }),
       addToList: (text) => set((state) => ({
         currentList: [
@@ -61,6 +62,8 @@ export const useListStore = create(
 export const useArchiveStore = create(
   persist(
     (set) => ({
+      activeUuidList: undefined,
+      setActiveUuidList: (uuid) => set((state) => ({ activeUuidList: uuid })),
       archivedList: [],
       addToArchive: (list) => set((state) => {
         return {
@@ -74,13 +77,13 @@ export const useArchiveStore = create(
           ]
         }
       }),
-      // removeFromArchive: (listUuid) => set((state) => {
-      //   const updtItems = [...state.archivedList].filter((list) => list.list_uuid !== listUuid)
-      //   return {
-      //     archivedList: updtItems
-      //   }
-      // })
-      removeFromArchive: (listUuid) => set({ archivedList: [] })
+      removeFromArchive: (listUuid) => set((state) => {
+        const updtItems = [...state.archivedList].filter((list) => list.list_uuid !== listUuid)
+        return {
+          archivedList: updtItems
+        }
+      })
+      // removeFromArchive: (listUuid) => set({ archivedList: [] })
     }),
     {
       name: 'archive-storage',
