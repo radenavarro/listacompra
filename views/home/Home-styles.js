@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export const homeStyles = ({ colors }) => StyleSheet.create({
+export const homeStyles = ({ dark, colors }) => StyleSheet.create({
   container: {
     width: '100%',
     minHeight: '100%',
@@ -8,7 +8,8 @@ export const homeStyles = ({ colors }) => StyleSheet.create({
     flexDirection: 'column',
     flexWrap: 'nowrap',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: dark ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0)'
   },
   list: {
     width: '100%',

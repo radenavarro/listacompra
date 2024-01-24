@@ -58,14 +58,20 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={isDarkMode ? DarkMode : LightMode}>
-        <Tab.Navigator>
+        <Tab.Navigator
+          activeColor={isDarkMode ? "#ffffff" : "#9600cd"}
+          inactiveColor={isDarkMode ? "#c1a2d1" : "#7e6ba3"}
+          barStyle={{backgroundColor: isDarkMode ? "#5d1285" : "#cdc0e8"}}
+          activeIndicatorStyle={{backgroundColor: isDarkMode ? 'rgb(157, 69, 193)' : 'rgb(239, 232, 254)'}}
+        >
           <Tab.Screen 
             name={'Lista'} 
             component={Home} 
             options={{
               tabBarIcon: ({color}) => (
-                <Icon style={styles.icon} name='home' />
-              )
+                <Icon style={styles.icon} name='home' color={color} />
+              ),
+              tabBarLabel: (<Text style={styles.label}>LISTA</Text>)
             }}
           />
           <Tab.Screen 
@@ -73,8 +79,9 @@ function App(): React.JSX.Element {
             component={Archivo} 
             options={{
               tabBarIcon: ({color}) => (
-                <Icon style={styles.icon} name='storage' />
-              )
+                <Icon style={styles.icon} name='storage' color={color} />
+              ),
+              tabBarLabel: (<Text style={styles.label}>ARCHIVO</Text>)
             }}
           />
         </Tab.Navigator>

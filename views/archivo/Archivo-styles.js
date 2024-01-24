@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export const ArchivoStyles = ({ colors }) => StyleSheet.create({
+export const ArchivoStyles = ({ dark, colors }) => StyleSheet.create({
   container: {
     padding: 0,
     display: 'flex',
@@ -9,7 +9,8 @@ export const ArchivoStyles = ({ colors }) => StyleSheet.create({
     // justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    backgroundColor: dark ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0)'
   },
   h4: {
     fontSize: 16,

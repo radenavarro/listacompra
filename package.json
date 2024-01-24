@@ -25,6 +25,7 @@
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^10.0.3",
     "react-speech-recognition": "^3.10.0",
+    "toastify-react-native": "^5.0.0",
     "zustand": "^4.4.7"
   },
   "devDependencies": {

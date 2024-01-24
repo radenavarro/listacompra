@@ -1,6 +1,7 @@
 import { DarkTheme } from '@react-navigation/native'
 
 export const DarkMode = {
+  dark: true,
   colors: {
     ...DarkTheme.colors,
     primary: 'rgb(13, 137, 233)',
