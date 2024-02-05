@@ -83,7 +83,13 @@ const Archivo = (props) => {
                       </Tag>
                     </View>
                     <View style={styles.listTexts}>
-                      <Text style={styles.listText} numberOfLines={2} ellipsizeMode='tail'>{item.items?.map(i => i.nombre)?.join(', ')}</Text>
+                      <Text
+                        style={styles.listText}
+                        numberOfLines={2}
+                        ellipsizeMode='tail'
+                      >
+                        {item.items?.map(i => (i.nombre) + ' x' + (i.cantidad ?? 1))?.join(', ')}
+                      </Text>
                     </View>
                   </>
                   )}

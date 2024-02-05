@@ -8,20 +8,22 @@ export const optionsBarStyles = ({ colors }) => StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: 8,
-    width: '80%',
+    width: '94%',
     marginTop: 16
   },
   item: {
-    padding: 4,
-    fontSize: 22,
+    // padding: 6,
+    fontSize: 16,
     color: colors.buttonText
   },
   text: {
+    fontSize: 12,
     color: colors.buttonText,
     fontFamily: 'Quicksand-Medium'
   },
   button: {
     flexGrow: 1,
+    padding: 6,
     borderColor: colors.borderButton,
     backgroundColor: colors.default,
     borderWidth: 1,

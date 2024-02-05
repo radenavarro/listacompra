@@ -3,6 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware'
 import uuid from 'react-native-uuid'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import dayjs from 'dayjs'
+import { sumStock, substractStock } from '../../helpers/helpers'
 
 /**
  * <p>Estado empleado para manejar listas y sus ítems</p>
@@ -25,12 +26,13 @@ export const useListStore = create(
       currentList: [],
       setCurrentList: (list) => set((state) => ({ currentList: list })),
       clearList: () => set({ currentList: [] }),
-      addToList: (text) => set((state) => ({
+      addToList: (text, amount) => set((state) => ({
         currentList: [
           ...state.currentList,
           {
             uuid: uuid.v4(),
-            nombre: text
+            nombre: text,
+            cantidad: amount
           }
         ]
       })),
@@ -68,12 +70,12 @@ export const useArchiveStore = create(
       addToArchive: (list) => set((state) => {
         return {
           archivedList: [
-            ...state.archivedList,
             {
               list_uuid: uuid.v4(),
               fecha: dayjs().format('DD-MM-YYYY | HH:mm:ss'),
               items: [...list]
-            }
+            },
+            ...state.archivedList
           ]
         }
       }),
@@ -90,4 +92,37 @@ export const useArchiveStore = create(
       storage: createJSONStorage(() => AsyncStorage)
     }
   )
+)
+
+export const useProductStore = create(
+  persist(
+    (set) => ({
+      productList: [],
+      addProducts: (productsInList) => set((state) => {
+        const products = [...state.productList]
+        const merged = sumStock(productsInList, products, 'uuid', 'cantidad')
+        return {
+          productList: merged
+        }
+      }),
+      removeProduct: (product) => set((state) => {
+        const products = substractStock([...state.productList], [product], 'uuid', 'cantidad')
+        return { productList: products }
+      }),
+      removeAllProducts: () => set((state) => ({ productList: [] }))
+    }),
+    {
+      name: 'product-storage',
+      storage: createJSONStorage(() => AsyncStorage)
+    }
+  )
+)
+
+export const useVoiceRecogFields = create(
+  (set) => ({
+    product: undefined,
+    amount: 1,
+    setProduct: (text) => set((state) => ({ product: text })),
+    setAmount: (qty) => set((state) => ({ amount: qty }))
+  })
 )

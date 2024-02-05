@@ -4,6 +4,7 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
   container: {
     // flex: 1,
     minHeight: 140,
+    width: '94%',
     marginVertical: 16,
     backgroundColor: colors.background,
     padding: 16,
@@ -80,5 +81,10 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
   roundIcon: {
     color: colors.buttonText,
     fontSize: 24
+  },
+  amountInput: {
+    width: 48,
+    fontFamily: 'Quicksand-Regular',
+    textAlign: 'center'
   }
 })

@@ -6,11 +6,13 @@ import { voiceRecogStyles } from './VoiceRecog-styles'
 import { useTheme } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 // Zustand store
-import { useListStore } from '../../hooks/zustand/storeHooks'
+import { useListStore, useVoiceRecogFields } from '../../hooks/zustand/storeHooks'
 
 const VoiceRecog = (props) => {
   const [result, setResult] = useState('')
+  // const [amount, setAmount] = useState('1')
   const [isLoading, setLoading] = useState(false)
+  const { product, amount, setProduct, setAmount } = useVoiceRecogFields()
 
   useEffect(() => {
     Voice.onSpeechStart = speechStartHandler
@@ -57,15 +59,15 @@ const VoiceRecog = (props) => {
     }
   }
 
-  // const clear = () => {
-  //   setResult('')
-  // }
-
   const handleAdd = () => {
     if (!result || result === '') {
       return Toast.warn(<Text>Debes escribir algo antes de añadir a la lista</Text>, 'top')
     }
-    return props.onAdd(result)
+    return props.onAdd(result, amount)
+  }
+
+  const handleChangeAmount = (qty) => {
+    setAmount(qty)
   }
 
   const setStoredItem = useListStore((state) => state.setCurrentItem)
@@ -79,14 +81,24 @@ const VoiceRecog = (props) => {
           <View style={styles.voiceRecogContainer}>
             <View style={styles.textInputStyle}>
               <TextInput
-                value={result}
+                value={product}
                 style={{ fontFamily: 'Quicksand-Regular', minWidth: 140 }}
             // multiline
-                placeholder='Prueba a decir algo'
+                placeholder='Producto'
                 onChangeText={(text) => {
                   setResult(text)
+                  setProduct(text)
                   setStoredItem(text)
                 }}
+              />
+            </View>
+            <View style={styles.textInputStyle}>
+              <TextInput
+                value={amount}
+                placeholder='Cant.'
+                style={styles.amountInput}
+                keyboardType='numeric'
+                onChangeText={handleChangeAmount}
               />
             </View>
             <View style={styles.btnContainer}>

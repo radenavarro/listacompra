@@ -38,6 +38,7 @@ import Home from './views/home/Home';
 import Archivo from './views/archivo/Archivo';
 // CSS in JS
 import {AppStyles} from './App-styles'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -58,6 +59,7 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaProvider>
       <NavigationContainer theme={isDarkMode ? DarkMode : LightMode}>
+        <GestureHandlerRootView style={{flex: 1}}>
         <Tab.Navigator
           activeColor={isDarkMode ? "#ffffff" : "#9600cd"}
           inactiveColor={isDarkMode ? "#c1a2d1" : "#7e6ba3"}
@@ -85,6 +87,8 @@ function App(): React.JSX.Element {
             }}
           />
         </Tab.Navigator>
+        </GestureHandlerRootView>
+        
       </NavigationContainer>
     </SafeAreaProvider>
   );
