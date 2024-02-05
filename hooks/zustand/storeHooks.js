@@ -98,6 +98,22 @@ export const useProductStore = create(
   persist(
     (set) => ({
       productList: [],
+      addOne: (uuid) => set((state) => {
+        const products = [...state.productList]
+        const idx = products.findIndex((p) => p.uuid === uuid)
+        if (idx !== -1) {
+          products[idx].cantidad = (products[idx].cantidad + 1)
+        }
+        return { productList: products }
+      }),
+      substractOne: (uuid) => set((state) => {
+        const products = [...state.productList]
+        const idx = products.findIndex((p) => p.uuid === uuid)
+        if (idx !== -1) {
+          products[idx].cantidad -= 1
+        }
+        return { productList: products.filter((p) => p.cantidad > 0) }
+      }),
       addProducts: (productsInList) => set((state) => {
         const products = [...state.productList]
         const merged = sumStock(productsInList, products, 'uuid', 'cantidad')
@@ -108,6 +124,14 @@ export const useProductStore = create(
       removeProduct: (product) => set((state) => {
         const products = substractStock([...state.productList], [product], 'uuid', 'cantidad')
         return { productList: products }
+      }),
+      clearStock: (uuid) => set((state) => {
+        const newList = [...state.productList]
+        const idx = newList.findIndex((pr) => pr.uuid === uuid)
+        if (idx !== -1) {
+          newList.splice(idx, 1)
+        }
+        return { productList: newList }
       }),
       removeAllProducts: () => set((state) => ({ productList: [] }))
     }),

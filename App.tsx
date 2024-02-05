@@ -39,6 +39,7 @@ import Archivo from './views/archivo/Archivo';
 // CSS in JS
 import {AppStyles} from './App-styles'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Stock from './views/stock/Stock';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -84,6 +85,16 @@ function App(): React.JSX.Element {
                 <Icon style={styles.icon} name='storage' color={color} />
               ),
               tabBarLabel: (<Text style={styles.label}>ARCHIVO</Text>)
+            }}
+          />
+          <Tab.Screen
+            name={'Stock'} 
+            component={Stock} 
+            options={{
+              tabBarIcon: ({color}) => (
+                <Icon style={styles.icon} name='kitchen' color={color} />
+              ),
+              tabBarLabel: (<Text style={styles.label}>STOCK</Text>)
             }}
           />
         </Tab.Navigator>

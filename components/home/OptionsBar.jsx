@@ -19,7 +19,7 @@ const OptionsBar = ({ actions, ...props }) => {
   // Voice
   const { setProduct, setAmount } = useVoiceRecogFields()
   // Stock
-  const { productList, addProducts } = useProductStore()
+  const { addProducts } = useProductStore()
 
   const handleArchiveList = () => {
     addToArchive(currentList)
