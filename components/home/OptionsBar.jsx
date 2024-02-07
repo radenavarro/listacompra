@@ -50,7 +50,7 @@ const OptionsBar = ({ actions, ...props }) => {
         <Icon style={styles.item} name='delete' />
         <Text style={styles.text}>Archivar lista</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity style={[styles.button, styles.helpbutton]} onPress={() => {}}>
         <Icon style={styles.item} name='question-mark' />
       </TouchableOpacity>
     </View>

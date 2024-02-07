@@ -4,7 +4,7 @@ export const optionsBarStyles = ({ colors }) => StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: 8,
@@ -17,7 +17,7 @@ export const optionsBarStyles = ({ colors }) => StyleSheet.create({
     color: colors.buttonText
   },
   text: {
-    fontSize: 12,
+    fontSize: 11,
     color: colors.buttonText,
     fontFamily: 'Quicksand-Medium'
   },
@@ -33,5 +33,9 @@ export const optionsBarStyles = ({ colors }) => StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 8
+  },
+  helpbutton: {
+    maxWidth: 30,
+    borderRadius: 50
   }
 })

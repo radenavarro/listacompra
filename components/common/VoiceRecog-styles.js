@@ -21,8 +21,9 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 16
+    gap: 8
   },
   textInputStyle: {
     flexDirection: 'row',
@@ -40,7 +41,8 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     // elevation: 2,
     // shadowOpacity: 0.4,
     color: colors.text,
-    fontFamily: 'Quicksand-Medium'
+    fontFamily: 'Quicksand-Medium',
+    flexGrow: 1
   },
   speak: {
     backgroundColor: colors.primary,
