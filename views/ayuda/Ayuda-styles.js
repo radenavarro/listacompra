@@ -6,7 +6,8 @@ export const AyudaStyles = ({ dark, colors }) => StyleSheet.create({
     flexDirection: 'column',
     flexWrap: 'nowrap',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: dark ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0)'
   },
   container: {
     padding: 0,
@@ -16,12 +17,12 @@ export const AyudaStyles = ({ dark, colors }) => StyleSheet.create({
     // justifyContent: 'center',
     alignItems: 'center',
     width: '94%',
-    height: '100%',
-    backgroundColor: dark ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0)'
+    height: '100%'
   },
   defaultFontStyle: {
     fontSize: 14,
-    fontFamily: 'Quicksand-Regular'
+    fontFamily: 'Quicksand-Regular',
+    textAlign: 'left'
   },
   bold: {
     fontFamily: 'Quicksand-Bold'
@@ -33,5 +34,18 @@ export const AyudaStyles = ({ dark, colors }) => StyleSheet.create({
   h2: {
     fontSize: 24,
     fontFamily: 'Quicksand-Bold'
+  },
+  alignLeft: {
+    width: '100%',
+    textAlign: 'left'
+  },
+  subItem: {
+    marginLeft: '10%'
+  },
+  spacer: {
+    marginTop: 16
+  },
+  spacerHalf: {
+    marginTop: 8
   }
 })
