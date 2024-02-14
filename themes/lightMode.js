@@ -1,5 +1,4 @@
 import { DefaultTheme } from '@react-navigation/native'
-console.log(DefaultTheme)
 export const LightMode = {
   dark: false,
   colors: {

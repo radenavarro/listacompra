@@ -1,7 +1,7 @@
 import { Alert, Text, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/MaterialIcons'
 import { optionsBarStyles } from './OptionsBar-styles'
-import { useTheme } from '@react-navigation/native'
+import { useNavigation, useTheme } from '@react-navigation/native'
 import { useArchiveStore, useListStore, useProductStore, useVoiceRecogFields } from '../../hooks/zustand/storeHooks'
 import { deepClone } from '../../helpers/helpers'
 
@@ -9,6 +9,8 @@ const OptionsBar = ({ actions, ...props }) => {
   const theme = useTheme()
   // console.log(theme)
   const styles = optionsBarStyles(theme)
+
+  const navigation = useNavigation()
 
   //      S T O R E
   // List
@@ -49,6 +51,10 @@ const OptionsBar = ({ actions, ...props }) => {
     setAmount('1')
   }
 
+  const goToHelp = () => {
+    return navigation?.navigate('Ayuda')
+  }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={confirmClearList}>
@@ -63,7 +69,7 @@ const OptionsBar = ({ actions, ...props }) => {
         <Icon style={currentList?.length === 0 ? styles.itemDisabled : styles.item} name='delete' />
         <Text style={currentList?.length === 0 ? styles.textDisabled : styles.text}>Archivar lista</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button, styles.helpbutton]} onPress={() => {}}>
+      <TouchableOpacity style={[styles.button, styles.helpbutton]} onPress={goToHelp}>
         <Icon style={styles.item} name='question-mark' />
       </TouchableOpacity>
     </View>

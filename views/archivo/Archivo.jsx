@@ -3,7 +3,6 @@ import { Text, SafeAreaView, ImageBackground, FlatList, View, Pressable, Touchab
 import Swipeable from 'react-native-swipeable'
 import { ArchivoStyles } from './Archivo-styles'
 import { useArchiveStore, useListStore } from '../../hooks/zustand/storeHooks'
-import { Icon } from 'react-native-paper'
 import Tag from '../../components/common/Tag'
 
 const Archivo = (props) => {

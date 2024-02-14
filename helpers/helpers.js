@@ -32,7 +32,7 @@ export const deepClone = (objeto) => {
 export const numberToText = (num, locale) => {
   try {
     const translatorLocale = new T2W(locale)
-    console.log(Object.values(translatorLocale))
+    // console.log(Object.values(translatorLocale))
     return translatorLocale.toWords(num)
   } catch (e) {
     console.error(e)

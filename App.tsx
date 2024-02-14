@@ -40,6 +40,7 @@ import Archivo from './views/archivo/Archivo';
 import {AppStyles} from './App-styles'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Stock from './views/stock/Stock';
+import Ayuda from './views/ayuda/Ayuda';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -47,6 +48,48 @@ type SectionProps = PropsWithChildren<{
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
+
+function BottomNavigation(isDarkMode: boolean, styles: { icon: any; label: any; }): React.JSX.Element {
+  return (
+    <Tab.Navigator
+      activeColor={isDarkMode ? "#ffffff" : "#9600cd"}
+      inactiveColor={isDarkMode ? "#c1a2d1" : "#7e6ba3"}
+      barStyle={{backgroundColor: isDarkMode ? "#5d1285" : "#cdc0e8"}}
+      activeIndicatorStyle={{backgroundColor: isDarkMode ? 'rgb(157, 69, 193)' : 'rgb(239, 232, 254)'}}
+    >   
+      <Tab.Screen 
+        name={'Lista'} 
+        component={Home} 
+        options={{
+          tabBarIcon: ({color}) => (
+            <Icon style={styles.icon} name='home' color={color} />
+          ),
+          tabBarLabel: (<Text style={styles.label}>LISTA</Text>)
+        }}
+      />
+      <Tab.Screen 
+        name={'Archivo'} 
+        component={Archivo} 
+        options={{
+          tabBarIcon: ({color}) => (
+            <Icon style={styles.icon} name='storage' color={color} />
+          ),
+          tabBarLabel: (<Text style={styles.label}>ARCHIVO</Text>)
+        }}
+      />
+      <Tab.Screen
+        name={'Stock'} 
+        component={Stock} 
+        options={{
+          tabBarIcon: ({color}) => (
+            <Icon style={styles.icon} name='kitchen' color={color} />
+          ),
+          tabBarLabel: (<Text style={styles.label}>STOCK</Text>)
+        }}
+      />
+    </Tab.Navigator>
+  )
+}
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === "dark";
@@ -61,45 +104,18 @@ function App(): React.JSX.Element {
     <SafeAreaProvider>
       <NavigationContainer theme={isDarkMode ? DarkMode : LightMode}>
         <GestureHandlerRootView style={{flex: 1}}>
-        <Tab.Navigator
-          activeColor={isDarkMode ? "#ffffff" : "#9600cd"}
-          inactiveColor={isDarkMode ? "#c1a2d1" : "#7e6ba3"}
-          barStyle={{backgroundColor: isDarkMode ? "#5d1285" : "#cdc0e8"}}
-          activeIndicatorStyle={{backgroundColor: isDarkMode ? 'rgb(157, 69, 193)' : 'rgb(239, 232, 254)'}}
-        >
-          <Tab.Screen 
-            name={'Lista'} 
-            component={Home} 
-            options={{
-              tabBarIcon: ({color}) => (
-                <Icon style={styles.icon} name='home' color={color} />
-              ),
-              tabBarLabel: (<Text style={styles.label}>LISTA</Text>)
-            }}
-          />
-          <Tab.Screen 
-            name={'Archivo'} 
-            component={Archivo} 
-            options={{
-              tabBarIcon: ({color}) => (
-                <Icon style={styles.icon} name='storage' color={color} />
-              ),
-              tabBarLabel: (<Text style={styles.label}>ARCHIVO</Text>)
-            }}
-          />
-          <Tab.Screen
-            name={'Stock'} 
-            component={Stock} 
-            options={{
-              tabBarIcon: ({color}) => (
-                <Icon style={styles.icon} name='kitchen' color={color} />
-              ),
-              tabBarLabel: (<Text style={styles.label}>STOCK</Text>)
-            }}
-          />
-        </Tab.Navigator>
-        </GestureHandlerRootView>
-        
+          <Stack.Navigator>
+            <Stack.Screen
+              name='Lista de la compra'
+            >
+              {() => BottomNavigation(isDarkMode, styles)}
+            </Stack.Screen>
+            <Stack.Screen
+              name='Ayuda'
+              component={Ayuda}
+            />
+          </Stack.Navigator>          
+        </GestureHandlerRootView>        
       </NavigationContainer>
     </SafeAreaProvider>
   );
