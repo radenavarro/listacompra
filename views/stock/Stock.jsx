@@ -1,13 +1,10 @@
 import { View, Text, Pressable, FlatList, TouchableHighlight, SafeAreaView, ImageBackground } from 'react-native'
-import { homeStyles } from './Home-styles'
-import VoiceRecog from '../../components/common/VoiceRecog'
-import OptionsBar from '../../components/home/OptionsBar'
 import { useState } from 'react'
 import { useTheme } from '@react-navigation/native'
 // import Swipeable from 'react-native-swipeable'
 import { Swipeable } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { useListStore, useProductStore } from '../../hooks/zustand/storeHooks'
+import { useProductStore } from '../../hooks/zustand/storeHooks'
 import { throttle } from '../../helpers/helpers'
 import { stockStyles } from './Stock-styles'
 
@@ -17,13 +14,8 @@ const Stock = (props) => {
   const theme = useTheme()
   const styles = stockStyles(theme)
 
-  const leftContent = <View><Text>Pull to activate</Text></View>
-
-  const leftButtons = [
-    <TouchableHighlight key='1'><Text>Button 1</Text></TouchableHighlight>,
-    <TouchableHighlight key='2'><Text>Button 2</Text></TouchableHighlight>
-  ]
   const { productList } = useProductStore()
+
   const swipeItemOut = useProductStore((state) => state.clearStock)
   const addOne = useProductStore((state) => state.addOne)
   const substractOne = useProductStore((state) => state.substractOne)
@@ -60,10 +52,6 @@ const Stock = (props) => {
               onEnded={(e) => {
                 setTimeout(() => {
                   console.log('percentSwiped onEnded:')
-                  // console.log(percentSwiped)
-                  // setSwiping(false)
-                  // setPercentSwiped(0)
-                  // setUuidSwiping(undefined)
                 }, 1000)
               }}
               onSwipeableOpen={(direction) => {
@@ -72,32 +60,36 @@ const Stock = (props) => {
               // onSwipeStart={() => { setSwiping(true) }}
               // onSwipeEnd={() => { setSwiping(false) }}
               renderLeftActions={(progress, dragX) => {
-                if (JSON.stringify(dragX) > 0) {
-                  const interpolated = JSON.stringify(progress.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, 100]
-                  }))
+                throttle(() => {
+                  if (JSON.stringify(dragX) > 0) {
+                    const interpolated = JSON.stringify(progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0, 100]
+                    }))
 
-                  if (interpolated !== percentSwiped) {
-                    throttle(setPercentSwiped(interpolated), 1000)
+                    if (interpolated !== percentSwiped) {
+                      setPercentSwiped(interpolated)
+                    }
                   }
-                }
+                }, 1000)
 
                 return (
                   <View style={{ width: '100%' }} />
                 )
               }}
               renderRightActions={(progress, dragX) => {
-                if (JSON.stringify(dragX) > 0) {
-                  const interpolated = JSON.stringify(progress.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, 100]
-                  }))
+                throttle(() => {
+                  if (JSON.stringify(dragX) > 0) {
+                    const interpolated = JSON.stringify(progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0, 100]
+                    }))
 
-                  if (interpolated !== percentSwiped) {
-                    throttle(setPercentSwiped(interpolated), 1000)
+                    if (interpolated !== percentSwiped) {
+                      setPercentSwiped(interpolated)
+                    }
                   }
-                }
+                }, 1000)
 
                 return (
                   <View style={styles.rightActionsWrapper}>

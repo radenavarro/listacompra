@@ -25,14 +25,14 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     alignItems: 'center',
     gap: 8
   },
-  textInputStyle: {
+  textInputWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.background,
     borderColor: colors.border,
     borderWidth: 1,
-    // height: 300,
+    height: 48,
     borderRadius: 10,
     paddingVertical: 2,
     paddingHorizontal: 2,
@@ -43,6 +43,11 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     color: colors.text,
     fontFamily: 'Quicksand-Medium',
     flexGrow: 1
+  },
+  textInputStyle: {
+    fontFamily: 'Quicksand-Regular',
+    minWidth: 140,
+    flex: 2
   },
   speak: {
     backgroundColor: colors.primary,
@@ -84,9 +89,46 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     color: colors.buttonText,
     fontSize: 24
   },
+  amountInputWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: colors.background,
+    borderColor: colors.border,
+    borderWidth: 1,
+    height: 48,
+    borderRadius: 10,
+    paddingVertical: 2,
+    paddingHorizontal: 2,
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowRadius: 2,
+    // elevation: 2,
+    // shadowOpacity: 0.4,
+    color: colors.text,
+    fontFamily: 'Quicksand-Medium',
+    flexGrow: 0
+  },
   amountInput: {
     width: 48,
     fontFamily: 'Quicksand-Regular',
     textAlign: 'center'
+  },
+  searchFlatlist: {
+    position: 'absolute',
+    top: 48,
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    width: '100%'
+  },
+  searchFlatlistItem: {
+    flexGrow: 1,
+    borderColor: colors.border,
+    borderWidth: 1,
+    padding: 8,
+    backgroundColor: colors.default
+  },
+  searchFlatlistText: {
+    fontFamily: 'Quicksand-Medium'
   }
 })

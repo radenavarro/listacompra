@@ -26,11 +26,11 @@ export const useListStore = create(
       currentList: [],
       setCurrentList: (list) => set((state) => ({ currentList: list })),
       clearList: () => set({ currentList: [] }),
-      addToList: (text, amount) => set((state) => ({
+      addToList: (uuid, text, amount) => set((state) => ({
         currentList: [
           ...state.currentList,
           {
-            uuid: uuid.v4(),
+            uuid,
             nombre: text,
             cantidad: amount
           }

@@ -16,9 +16,19 @@ export const optionsBarStyles = ({ colors }) => StyleSheet.create({
     fontSize: 16,
     color: colors.buttonText
   },
+  itemDisabled: {
+    // padding: 6,
+    fontSize: 16,
+    color: colors.buttonTextDisabled
+  },
   text: {
     fontSize: 11,
     color: colors.buttonText,
+    fontFamily: 'Quicksand-Medium'
+  },
+  textDisabled: {
+    fontSize: 11,
+    color: colors.buttonTextDisabled,
     fontFamily: 'Quicksand-Medium'
   },
   button: {

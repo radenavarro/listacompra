@@ -8,6 +8,7 @@ export const LightMode = {
     danger: 'rgb(255, 127, 127)',
     default: 'rgba(0, 0, 0, 0.1)',
     buttonText: 'rgb(0, 0, 0)',
+    buttonTextDisabled: 'rgb(138, 138, 138)',
     background: 'rgb(242, 242, 242)',
     card: 'rgb(255, 255, 255)',
     text: 'rgb(28, 28, 30)',
@@ -19,6 +20,8 @@ export const LightMode = {
     backgroundChecked: 'rgba(0, 0, 0, 0.2)',
     shadowColor: '#171717',
     tagBorder: 'rgba(0, 0, 0, 0.2)',
-    tag: 'rgba(0, 0, 0, 0.05)'
+    tag: 'rgba(0, 0, 0, 0.05)',
+    confirmBackground: 'rgb(155, 111, 255)',
+    confirmText: 'rgb(255, 255, 255)'
   }
 }

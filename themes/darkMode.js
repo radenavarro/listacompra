@@ -8,6 +8,7 @@ export const DarkMode = {
     danger: 'rgb(175, 11, 11)',
     default: 'rgb(68, 68, 68)',
     buttonText: 'rgb(255, 255, 255)',
+    buttonTextDisabled: 'rgb(179, 179, 179)',
     background: 'rgb(32, 32, 32)',
     card: 'rgb(32, 32, 32)',
     text: 'rgb(255, 255, 255)',
@@ -19,6 +20,8 @@ export const DarkMode = {
     backgroundChecked: 'rgba(255, 255, 255, 0.2)',
     shadowColor: '#e1e1e1',
     tagBorder: 'rgba(255, 255, 255, 0.2)',
-    tag: 'rgba(255, 255, 255, 0.05)'
+    tag: 'rgba(255, 255, 255, 0.05)',
+    confirmBackground: '#c1a2d1',
+    confirmText: 'rgb(32, 32, 32)'
   }
 }

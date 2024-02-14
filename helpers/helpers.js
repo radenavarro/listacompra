@@ -1,9 +1,5 @@
-const operatorList = {
-  sum: 'sum',
-  substract: 'sub',
-  multiply: 'multi',
-  divide: 'div'
-}
+import { operatorList } from './diccionario'
+const T2W = require('numbers2words')
 
 export const debounce = (fn, delay = 0) => {
   let id
@@ -29,6 +25,32 @@ export const throttle = (fn, timeDelay = 1000) => {
   }
 }
 
+export const deepClone = (objeto) => {
+  return JSON.parse(JSON.stringify(objeto))
+}
+
+export const numberToText = (num, locale) => {
+  try {
+    const translatorLocale = new T2W(locale)
+    console.log(Object.values(translatorLocale))
+    return translatorLocale.toWords(num)
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+// P L U R A L I Z E
+
+export const handlePlural = (word, qty, locale = 'es-ES') => {
+  const plural = 's'
+  const pl = new Intl.PluralRules(locale)
+  if (pl.select(qty) === 'one') return (word)
+  if (pl.select(qty) === 'other') return (word + plural)
+  return word
+}
+
+// S T O C K
+
 export const sumStock = (originalProducts, newProducts, property, sumKeys) => {
   return operateStock(originalProducts, newProducts, property, sumKeys, operatorList.sum)
 }
@@ -41,7 +63,6 @@ const operateStock = (originalProducts, newProducts, property, sumKeys, operator
   const updatedStock = [...originalProducts]
   for (const product of newProducts) {
     const idx = updatedStock.findIndex((p) => p.uuid === product.uuid)
-    console.log(idx)
     if (idx !== -1) {
       updatedStock[idx].cantidad = operate(updatedStock[idx].cantidad, product.cantidad, operator)
     } else {
@@ -53,9 +74,9 @@ const operateStock = (originalProducts, newProducts, property, sumKeys, operator
 
 export const operate = (firstVal, secondVal, operator) => {
   let result
-  if (operator === operatorList.sum) result = firstVal += secondVal
-  if (operator === operatorList.substract) result = firstVal -= secondVal
-  if (operator === operatorList.multiply) result = firstVal *= secondVal
-  if (operator === operatorList.divide) result = firstVal /= secondVal
+  if (operator === operatorList.sum) result = (parseInt(firstVal) + parseInt(secondVal)).toString()
+  if (operator === operatorList.substract) result = (firstVal - secondVal)
+  if (operator === operatorList.multiply) result = (firstVal * secondVal)
+  if (operator === operatorList.divide) result = (firstVal / secondVal)
   return result
 }
