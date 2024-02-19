@@ -4,6 +4,7 @@ export const LightMode = {
   colors: {
     ...DefaultTheme.colors,
     primary: 'rgb(150, 209, 255)',
+    warning: 'rgb(255, 219, 41)',
     danger: 'rgb(255, 127, 127)',
     default: 'rgba(0, 0, 0, 0.1)',
     buttonText: 'rgb(0, 0, 0)',

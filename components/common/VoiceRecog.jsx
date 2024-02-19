@@ -64,6 +64,7 @@ const VoiceRecog = (props) => {
       }
     }
     setResult(text)
+    setProduct(text)
     setStoredItem(text)
   }
 

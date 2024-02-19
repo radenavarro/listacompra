@@ -6,6 +6,7 @@ export const DarkMode = {
     ...DarkTheme.colors,
     primary: 'rgb(13, 137, 233)',
     danger: 'rgb(175, 11, 11)',
+    warning: 'rgb(206, 151, 0)',
     default: 'rgb(68, 68, 68)',
     buttonText: 'rgb(255, 255, 255)',
     buttonTextDisabled: 'rgb(179, 179, 179)',

@@ -42,6 +42,16 @@ export const useListStore = create(
           currentList: updtItems
         }
       }),
+      modifyFromList: (item) => set((state) => {
+        const updtItems = [...state.currentList]
+        const idx = updtItems.findIndex((listItem) => listItem.uuid === item.uuid)
+        if (idx !== -1) {
+          updtItems[idx] = item
+        }
+        return {
+          currentList: updtItems
+        }
+      }),
       checkItem: (uuid) => set((state) => {
         const updtItems = [...state.currentList]
         const idx = updtItems.findIndex((it) => it.uuid === uuid)
@@ -51,9 +61,24 @@ export const useListStore = create(
         return {
           currentList: updtItems
         }
+      }),
+      addOne: (uuid) => set((state) => {
+        const products = [...state.currentList]
+        const idx = products.findIndex((p) => p.uuid === uuid)
+        if (idx !== -1) {
+          products[idx].cantidad = (products[idx].cantidad) + 1
+        }
+        return { currentList: products }
+      }),
+      substractOne: (uuid) => set((state) => {
+        const products = [...state.currentList]
+        const idx = products.findIndex((p) => p.uuid === uuid)
+        if (idx !== -1) {
+          products[idx].cantidad -= 1
+        }
+        return { currentList: products.filter((p) => p.cantidad > 0) }
       })
-    })
-    ,
+    }),
     {
       name: 'list-storage',
       storage: createJSONStorage(() => AsyncStorage)
