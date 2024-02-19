@@ -48,15 +48,18 @@ const VoiceRecog = (props) => {
     if (stateLocale) {
       // Encuentra el número exacto como palabra (y no solo parte de él), o el número directamente
       const quantity = Object.entries(numbers.locales[stateLocale])
-        ?.find((entry) => (
-          (text.match(new RegExp('(^|\\W)' + entry[1] + '($|\\W)')))?.length > 0 ||
+        ?.find((entry) => {
+          if ((text.match(/(^|\W)(un|una)($|\W)/))?.length > 0) return entry//  Caso un/una
+          return (text.match(new RegExp('(^|\\W)' + entry[1] + '($|\\W)')))?.length > 0 ||
           text.match(/[0-9]*/m)?.[0] === entry[0]
-        ))
+        })
 
       let newText = text
       let newQty = amount
       if (quantity) {
-        newText = text.replace(quantity[1], '')?.trim()
+        newText = typeof quantity[1] === 'string'
+          ? text.replace(quantity[1], '')?.trim()
+          : text.replace((text.match(/(^|\W)(un|una)($|\W)/))?.[0], '')// Caso un/una
         newQty = quantity[0]
         setResult(newText) // legacy
         setProduct(newText)
@@ -125,23 +128,23 @@ const VoiceRecog = (props) => {
         <SafeAreaView>
           <Text style={styles.headingText}>Lista de la compra</Text>
           <View style={styles.voiceRecogContainer}>
-            <FlatList
-              style={styles.searchFlatlist}
-              data={searchResult}
-              renderItem={({ item }) => {
-                return (
-                  <>
-                    <TouchableOpacity onPress={() => setSearchResult([])}>
-                      <Icon name='close' style={{ fontSize: 22 }} />
-                    </TouchableOpacity>
+            <View style={{ display: searchResult?.length > 0 ? 'block' : 'none' }}>
+              <TouchableOpacity onPress={() => setSearchResult([])}>
+                <Icon name='close' style={{ fontSize: 22 }} />
+              </TouchableOpacity>
+              <FlatList
+                style={styles.searchFlatlist}
+                data={searchResult}
+                renderItem={({ item }) => {
+                  return (
                     <TouchableOpacity style={styles.searchFlatlistItem} onPress={() => handleSelect(item)}>
                       <Text numberOfLines={1} ellipsizeMode='tail' style={styles.searchFlatlistText}>{item.nombre}</Text>
                     </TouchableOpacity>
-                  </>
+                  )
+                }}
+              />
+            </View>
 
-                )
-              }}
-            />
             <View style={styles.textInputWrapper}>
               <TextInput
                 value={product}
