@@ -51,7 +51,7 @@ const Stock = (props) => {
               }}
               onEnded={(e) => {
                 setTimeout(() => {
-                  console.log('percentSwiped onEnded:')
+                  // console.log('percentSwiped onEnded:')
                 }, 1000)
               }}
               onSwipeableOpen={(direction) => {

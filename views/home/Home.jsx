@@ -99,8 +99,6 @@ const Home = (props) => {
               }}
               onEnded={(e) => {
                 setTimeout(() => {
-                  console.log('percentSwiped onEnded:')
-                  // console.log(percentSwiped)
                   setSwiping(false)
                   setPercentSwiped(0)
                   setUuidSwiping(undefined)
