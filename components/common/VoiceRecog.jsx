@@ -60,7 +60,7 @@ const VoiceRecog = (props) => {
         newQty = quantity[0]
         setResult(newText) // legacy
         setProduct(newText)
-        setAmount(newQty)
+        return setAmount(newQty)
       }
     }
     setResult(text)
