@@ -4,9 +4,9 @@ export const DarkMode = {
   dark: true,
   colors: {
     ...DarkTheme.colors,
-    primary: 'rgb(13, 137, 233)',
-    danger: 'rgb(175, 11, 11)',
-    warning: 'rgb(206, 151, 0)',
+    primary: 'rgb(9, 92, 155)',
+    danger: 'rgb(125, 8, 8)',
+    warning: 'rgb(122, 90, 0)',
     default: 'rgb(68, 68, 68)',
     buttonText: 'rgb(255, 255, 255)',
     buttonTextDisabled: 'rgb(179, 179, 179)',
@@ -23,6 +23,9 @@ export const DarkMode = {
     tagBorder: 'rgba(255, 255, 255, 0.2)',
     tag: 'rgba(255, 255, 255, 0.05)',
     confirmBackground: '#c1a2d1',
-    confirmText: 'rgb(32, 32, 32)'
+    confirmText: 'rgb(32, 32, 32)',
+    searchItemBorder: 'rgb(157, 69, 193)',
+    searchItemBackground: '#5d1285',
+    searchItemText: 'rgb(32, 32, 32)'
   }
 }

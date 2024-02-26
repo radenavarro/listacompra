@@ -1,4 +1,4 @@
-import { View, Text, Pressable, FlatList, TouchableHighlight, SafeAreaView, ImageBackground, Modal, TextInput } from 'react-native'
+import { View, Text, Pressable, FlatList, TouchableHighlight, SafeAreaView, ImageBackground, Modal, TextInput, TouchableOpacity } from 'react-native'
 import { homeStyles } from './Home-styles'
 import VoiceRecog from '../../components/common/VoiceRecog'
 import OptionsBar from '../../components/home/OptionsBar'
@@ -9,6 +9,7 @@ import { Swipeable } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { useListStore } from '../../hooks/zustand/storeHooks'
 import { throttle } from '../../helpers/helpers'
+import ToastManager, { Toast } from 'toastify-react-native'
 
 const Home = (props) => {
   // E S T A D O
@@ -37,6 +38,7 @@ const Home = (props) => {
   const handleModify = (item) => {
     modifyFromList(item)
     setEditing(undefined)
+    Toast.success('Se ha modificado el nombre del producto')
   }
 
   const Item = ({ uuid, title, qty, checked }) => (
@@ -57,6 +59,7 @@ const Home = (props) => {
 
   return (
     <ImageBackground source={require('../../img/image-3ucottvo.png')} resizeMode='repeat'>
+      <ToastManager duration={3000} animationStyle='rightInOut' textStyle={{ fontSize: 12 }} width={256} height={92} position='bottom' />
       <SafeAreaView style={styles.container}>
         <Modal
           animationType='fade'
@@ -75,12 +78,12 @@ const Home = (props) => {
                 onChangeText={(text) => setEditing({ ...editing, nombre: text })}
               />
               <View style={styles.modalActions}>
-                <TouchableHighlight key='1'>
+                <TouchableOpacity key='1' onPress={() => setEditing(undefined)}>
                   <Icon name='close' style={styles.modalCancelButton} />
-                </TouchableHighlight>
-                <TouchableHighlight key='2' onPress={() => handleModify(editing)}>
+                </TouchableOpacity>
+                <TouchableOpacity key='2' onPress={() => handleModify(editing)}>
                   <Icon name='done' style={styles.modalOkButton} />
-                </TouchableHighlight>
+                </TouchableOpacity>
               </View>
             </View>
           </Pressable>

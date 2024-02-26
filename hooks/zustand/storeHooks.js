@@ -66,7 +66,7 @@ export const useListStore = create(
         const products = [...state.currentList]
         const idx = products.findIndex((p) => p.uuid === uuid)
         if (idx !== -1) {
-          products[idx].cantidad = (products[idx].cantidad) + 1
+          products[idx].cantidad = (parseInt(products[idx].cantidad) + 1)?.toString()
         }
         return { currentList: products }
       }),
@@ -127,7 +127,7 @@ export const useProductStore = create(
         const products = [...state.productList]
         const idx = products.findIndex((p) => p.uuid === uuid)
         if (idx !== -1) {
-          products[idx].cantidad = (products[idx].cantidad + 1)
+          products[idx].cantidad = (parseInt(products[idx].cantidad) + 1)?.toString()
         }
         return { productList: products }
       }),

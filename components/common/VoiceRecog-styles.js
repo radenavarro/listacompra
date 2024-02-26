@@ -9,7 +9,7 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     backgroundColor: colors.background,
     padding: 16,
     shadowColor: colors.shadowColor,
-    elevation: 4
+    zIndex: 4
   },
   headingText: {
     alignSelf: 'center',
@@ -113,9 +113,14 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
     fontFamily: 'Quicksand-Regular',
     textAlign: 'center'
   },
-  searchFlatlist: {
+  searchFlatlistContainer: {
     position: 'absolute',
-    top: 48,
+    top: 56,
+    width: '100%',
+    zIndex: 4,
+    elevation: 4
+  },
+  searchFlatlist: {
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'nowrap',
@@ -123,12 +128,30 @@ export const voiceRecogStyles = ({ colors }) => StyleSheet.create({
   },
   searchFlatlistItem: {
     flexGrow: 1,
-    borderColor: colors.border,
+    borderColor: colors.searchItemBorder,
     borderWidth: 1,
     padding: 8,
-    backgroundColor: colors.default
+    backgroundColor: colors.searchItemBackground,
+    minWidth: 128
   },
   searchFlatlistText: {
     fontFamily: 'Quicksand-Medium'
+  },
+  searchFlatlistClose: {
+    width: 32,
+    padding: 4,
+    borderRadius: 50,
+    backgroundColor: colors.warning
+  },
+  searchFlatlistCloseIcon: {
+    fontSize: 24
+  },
+  searchFlatlistFirstItem: {
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8
+  },
+  searchFlatlistLastItem: {
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8
   }
 })

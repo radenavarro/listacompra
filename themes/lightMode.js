@@ -22,6 +22,9 @@ export const LightMode = {
     tagBorder: 'rgba(0, 0, 0, 0.2)',
     tag: 'rgba(0, 0, 0, 0.05)',
     confirmBackground: 'rgb(155, 111, 255)',
-    confirmText: 'rgb(255, 255, 255)'
+    confirmText: 'rgb(255, 255, 255)',
+    searchItemBorder: 'rgb(239, 232, 254)',
+    searchItemBackground: '#cdc0e8',
+    searchItemText: 'rgb(32, 32, 32)'
   }
 }

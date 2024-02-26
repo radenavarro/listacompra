@@ -52,6 +52,7 @@ export const homeStyles = ({ dark, colors }) => StyleSheet.create({
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 6
   },
+  // RIGHT ACTIONS
   rightActionsWrapper: {
     width: 144,
     display: 'flex',
@@ -94,6 +95,7 @@ export const homeStyles = ({ dark, colors }) => StyleSheet.create({
   rightActionsIcon: {
     fontSize: 28
   },
+  // MODAL
   modalCenter: {
     flex: 1,
     justifyContent: 'center',

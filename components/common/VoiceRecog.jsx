@@ -128,16 +128,23 @@ const VoiceRecog = (props) => {
         <SafeAreaView>
           <Text style={styles.headingText}>Lista de la compra</Text>
           <View style={styles.voiceRecogContainer}>
-            <View style={{ display: searchResult?.length > 0 ? 'block' : 'none' }}>
-              <TouchableOpacity onPress={() => setSearchResult([])}>
-                <Icon name='close' style={{ fontSize: 22 }} />
+            {/* Búsqueda de productos en stock */}
+            <View style={{ ...styles.searchFlatlistContainer, display: (searchResult?.length > 0 && result !== '') ? 'block' : 'none' }}>
+              <TouchableOpacity style={styles.searchFlatlistClose} onPress={() => setSearchResult([])}>
+                <Icon name='close' style={styles.searchFlatlistCloseIcon} />
               </TouchableOpacity>
               <FlatList
                 style={styles.searchFlatlist}
                 data={searchResult}
-                renderItem={({ item }) => {
+                renderItem={({ item, index }) => {
+                  const itemStyles = (() => {
+                    const estilos = []
+                    if (index === 0) estilos.push(styles.searchFlatlistFirstItem)
+                    if (index === searchResult.length - 1) estilos.push(styles.searchFlatlistLastItem)
+                    return estilos
+                  })()
                   return (
-                    <TouchableOpacity style={styles.searchFlatlistItem} onPress={() => handleSelect(item)}>
+                    <TouchableOpacity style={[styles.searchFlatlistItem, ...itemStyles]} onPress={() => handleSelect(item)}>
                       <Text numberOfLines={1} ellipsizeMode='tail' style={styles.searchFlatlistText}>{item.nombre}</Text>
                     </TouchableOpacity>
                   )
