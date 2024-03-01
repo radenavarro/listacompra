@@ -9,7 +9,8 @@ import { Swipeable } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { useListStore } from '../../hooks/zustand/storeHooks'
 import { throttle } from '../../helpers/helpers'
-import ToastManager, { Toast } from 'toastify-react-native'
+// import ToastManager, { Toast } from 'toastify-react-native'
+import { Notifier, Easing, NotifierComponents } from 'react-native-notifier'
 
 const Home = (props) => {
   // E S T A D O
@@ -38,7 +39,21 @@ const Home = (props) => {
   const handleModify = (item) => {
     modifyFromList(item)
     setEditing(undefined)
-    Toast.success('Se ha modificado el nombre del producto')
+    console.log('modificar')
+    Notifier.showNotification({
+      title: '',
+      description: 'Se ha modificado el nombre del producto',
+      duration: 3000,
+      showAnimationDuration: 400,
+      showEasing: Easing.bounce,
+      onHidden: () => console.log('Hidden'),
+      onPress: () => console.log('Press'),
+      hideOnPress: false,
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'success'
+      }
+    })
   }
 
   const Item = ({ uuid, title, qty, checked }) => (
@@ -59,8 +74,8 @@ const Home = (props) => {
 
   return (
     <ImageBackground source={require('../../img/image-3ucottvo.png')} resizeMode='repeat'>
-      <ToastManager duration={3000} animationStyle='rightInOut' textStyle={{ fontSize: 12 }} width={256} height={92} position='bottom' />
       <SafeAreaView style={styles.container}>
+        {/* <ToastManager duration={3000} animationStyle='rightInOut' textStyle={{ fontSize: 12 }} width={312} height={92} position='bottom' /> */}
         <Modal
           animationType='fade'
           transparent

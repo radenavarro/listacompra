@@ -29,7 +29,8 @@ import {
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+// TOAST
+import { NotifierWrapper } from 'react-native-notifier';
 // THEMES
 import { DarkMode } from './themes/darkMode';
 import { LightMode } from './themes/lightMode';
@@ -104,17 +105,20 @@ function App(): React.JSX.Element {
     <SafeAreaProvider>
       <NavigationContainer theme={isDarkMode ? DarkMode : LightMode}>
         <GestureHandlerRootView style={{flex: 1}}>
-          <Stack.Navigator>
-            <Stack.Screen
-              name='Lista de la compra'
-            >
-              {() => BottomNavigation(isDarkMode, styles)}
-            </Stack.Screen>
-            <Stack.Screen
-              name='Ayuda'
-              component={Ayuda}
-            />
-          </Stack.Navigator>          
+          <NotifierWrapper>
+            <Stack.Navigator>
+              <Stack.Screen
+                name='Lista de la compra'
+              >
+                {() => BottomNavigation(isDarkMode, styles)}
+              </Stack.Screen>
+              <Stack.Screen
+                name='Ayuda'
+                component={Ayuda}
+              />
+            </Stack.Navigator>  
+          </NotifierWrapper>
+                  
         </GestureHandlerRootView>        
       </NavigationContainer>
     </SafeAreaProvider>

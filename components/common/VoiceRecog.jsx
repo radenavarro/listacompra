@@ -1,6 +1,7 @@
 import { SafeAreaView, Text, TextInput, TouchableOpacity, View, ActivityIndicator, FlatList } from 'react-native'
 import { useCallback, useEffect, useState } from 'react'
-import ToastManager, { Toast } from 'toastify-react-native'
+// import ToastManager, { Toast } from 'toastify-react-native'
+import { Notifier, Easing, NotifierComponents } from 'react-native-notifier'
 import uuid from 'react-native-uuid'
 import Voice from '@react-native-community/voice'
 import { voiceRecogStyles } from './VoiceRecog-styles'
@@ -91,7 +92,20 @@ const VoiceRecog = (props) => {
 
   const handleAdd = () => {
     if (!result || result === '') {
-      return Toast.warn(<Text>Debes escribir algo antes de añadir a la lista</Text>, 'top')
+      return Notifier.showNotification({
+        title: '',
+        description: <Text>Debes escribir algo antes de añadir a la lista</Text>,
+        duration: 3000,
+        showAnimationDuration: 400,
+        showEasing: Easing.bounce,
+        onHidden: () => console.log('Hidden'),
+        onPress: () => console.log('Press'),
+        Component: NotifierComponents.Alert,
+        componentProps: {
+          alertType: 'warn'
+        },
+        hideOnPress: false
+      })
     }
     const newUuid = uuid.v4()
     return props.onAdd(newUuid, result, amount)
@@ -123,9 +137,9 @@ const VoiceRecog = (props) => {
 
   return (
     <>
-      <ToastManager duration={3000} animationStyle='rightInOut' textStyle={{ fontSize: 12 }} width={256} height={92} position='bottom' />
       <View style={styles.container}>
         <SafeAreaView>
+          {/* <ToastManager duration={3000} animationStyle='rightInOut' textStyle={{ fontSize: 12 }} width={256} height={92} position='bottom' /> */}
           <Text style={styles.headingText}>Lista de la compra</Text>
           <View style={styles.voiceRecogContainer}>
             {/* Búsqueda de productos en stock */}
